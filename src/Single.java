@@ -5,7 +5,7 @@ import java.util.Arrays;
  * This object represents a person who is looking for a partner.
  * The attributes describe the own properties and the search criteria.
  */
-public class Single {
+public class Single implements Cloneable {
 
     private String firstName;
     private String lastName;
@@ -61,6 +61,11 @@ public class Single {
                 ", seeksAgeMin=" + seeksAgeMin +
                 ", seeksAgeMax=" + seeksAgeMax +
                 '}';
+    }
+
+    @Override
+    protected Single clone() throws CloneNotSupportedException {
+        return (Single) super.clone();
     }
 
     public String getFirstName() {
