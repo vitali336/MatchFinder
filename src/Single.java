@@ -35,11 +35,8 @@ public class Single {
      * criteria of the single represented by this object.
      */
     public boolean likesSingle(Single single) {
-        if (single.age <= this.seeksAgeMax && single.age >= this.seeksAgeMin
-                && this.seeksGenders.contains(single.gender)) {
-            return true;
-        }
-        return false;
+        return single.age <= this.seeksAgeMax && single.age >= this.seeksAgeMin
+                && this.seeksGenders.contains(single.gender);
     }
 
     /**
@@ -99,7 +96,7 @@ public class Single {
     }
 
     public Gender[] getSeeksGenders() {
-        return (Gender[]) this.seeksGenders.toArray();
+        return this.seeksGenders.toArray(new Gender[0]);
     }
 
     public void setSeeksGenders(Gender[] seeksGenders) {
