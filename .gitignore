@@ -1,4 +1,6 @@
 ### IntelliJ IDEA ###
+/.idea/
+MatchFinder.iml
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
