@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * This object represents a person who is looking for a partner.
+ * Objects of this class represent a person who is looking for a partner.
  * The attributes describe the own properties and the search criteria.
  */
 public class Single implements Cloneable {
@@ -52,15 +52,13 @@ public class Single implements Cloneable {
 
     @Override
     public String toString() {
-        return "Single{" +
-                "firstName='" + firstName + '\'' +
+        return "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", gender=" + gender +
                 ", age=" + age +
                 ", seeksGenders=" + seeksGenders +
                 ", seeksAgeMin=" + seeksAgeMin +
-                ", seeksAgeMax=" + seeksAgeMax +
-                '}';
+                ", seeksAgeMax=" + seeksAgeMax;
     }
 
     @Override
