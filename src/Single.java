@@ -1,11 +1,14 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.UUID;
 
 /**
  * Objects of this class represent a person who is looking for a partner.
  * The attributes describe the own properties and the search criteria.
  */
 public class Single implements Cloneable {
+
+    private final UUID id;
 
     private String firstName;
     private String lastName;
@@ -17,6 +20,8 @@ public class Single implements Cloneable {
 
     public Single(String firstName, String lastName, Gender gender, int age,
                   Gender[] seeksGenders, int seeksAgeMin, int seeksAgeMax) {
+
+        this.id = UUID.randomUUID();
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -40,31 +45,45 @@ public class Single implements Cloneable {
     }
 
     /**
-     * Checks if there is a match between two singles.
-     * @param single1 object of a single
-     * @param single2 object of a single
-     * @return true if single1 meets the search
-     * criteria of single2 and vice versa.
+     * Checks if there is a match between the single represented by this object
+     * and another single.
+     * @param single object of another single
+     * @return true if the single represented by this object meets the search
+     * criteria of the other one and vice versa
      */
-    public static boolean match(Single single1, Single single2) {
-        return single1.likesSingle(single2) && single2.likesSingle(single1);
+    public boolean matchWith(Single single) {
+        return this.likesSingle(single) && single.likesSingle(this);
+    }
+
+    public boolean isHetero(){
+        return this.gender == Gender.MALE
+                && this.seeksGenders.size() == 1
+                && this.seeksGenders.get(0) == Gender.FEMALE
+                ||
+                this.gender == Gender.FEMALE
+                        && this.seeksGenders.size() == 1
+                        && this.seeksGenders.get(0) == Gender.MALE;
     }
 
     @Override
     public String toString() {
-        return "firstName='" + firstName + '\'' +
+        return "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", gender=" + gender +
                 ", age=" + age +
                 ", seeksGenders=" + seeksGenders +
                 ", seeksAgeMin=" + seeksAgeMin +
-                ", seeksAgeMax=" + seeksAgeMax;
+                ", seeksAgeMax=" + seeksAgeMax + '\n';
     }
 
     @Override
     protected Single clone() throws CloneNotSupportedException {
-        return (Single) super.clone();
+        return new Single(this.firstName, this.lastName, this.gender, this.age, this.getSeeksGenders(), this.seeksAgeMin, this.seeksAgeMax);
     }
+
+
+    public UUID getId() { return id; }
 
     public String getFirstName() {
         return firstName;
