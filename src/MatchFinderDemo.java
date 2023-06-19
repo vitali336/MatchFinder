@@ -1,5 +1,13 @@
+
+
+/**
+ * Here it is demonstrated that the algorithm 'findMatchPairs2'
+ * is more performant and finds as many matches as 'findMatchPairs1'.
+ * For a more obvious difference, add more Single objects.
+ * For details check the classes Single, Singles and MatchPair.
+ */
 public class MatchFinderDemo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CloneNotSupportedException {
 
         Single s1 = new Single("Hans", "Krüger", Gender.MALE, 54, new Gender[]{Gender.FEMALE}, 40, 60);
         Single s2 = new Single("Lisa", "Müller", Gender.FEMALE, 26, new Gender[]{Gender.FEMALE, Gender.DIVERSE}, 22, 40);
@@ -12,10 +20,29 @@ public class MatchFinderDemo {
         Single s9 = new Single("Gönül", "Porcu", Gender.FEMALE, 20, new Gender[]{Gender.MALE}, 19, 30);
         Single s10 = new Single("Pedro", "Mariano", Gender.MALE, 35, new Gender[]{Gender.FEMALE}, 30, 36);
 
-        Single[] singles = {s1, s2, s3, s4, s5, s6, s7, s8, s9, s10};
-        MatchPair[] matchPairs = MatchPair.findMatchPairs1(singles);
+        Singles singles = new Singles(new Single[]{s1, s2, s3, s4, s5, s6, s7, s8, s9, s10});
 
+        final long timeStart1 = System.currentTimeMillis();
+        MatchPair[] matchPairs = singles.findMatchPairs1();
+        final long timeEnd1 = System.currentTimeMillis();
+        final long time1 = timeEnd1 - timeStart1;
+
+        final long timeStart2 = System.currentTimeMillis();
+        MatchPair[] matchPairs2 = singles.findMatchPairs2();
+        final long timeEnd2 = System.currentTimeMillis();
+        final long time2 = timeEnd2 - timeStart2;
+
+        System.out.println("Find MatchPairs with 'findMatchPairs1' (" + time1 + " Milliseconds):" + '\n');
         for (MatchPair matchPair : matchPairs
+        ) {
+            System.out.println(matchPair);
+        }
+
+        System.out.println("_________________________________________" + '\n'
+                            + "_________________________________________" +'\n');
+
+        System.out.println("Find MatchPairs with 'findMatchPairs2' (" + time2 + " Milliseconds):" + '\n');
+        for (MatchPair matchPair : matchPairs2
         ) {
             System.out.println(matchPair);
         }
